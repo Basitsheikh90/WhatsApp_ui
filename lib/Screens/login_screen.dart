@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_app/Screens/OPD_Screen.dart';
 import 'package:whatsapp_app/Widgets/Ui_helper.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,8 +10,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController phonecontroller = TextEditingController();
   String selectedcountry = "Pakistan";
-  List<String> countries = ["germany", "indonesia", "Africa", "England"];
+  List<String> countries = [
+    "germany",
+    "indonesia",
+    "Africa",
+    "England",
+    "Pakistan"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,26 +52,77 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
           height: 50,
         ),
-        DropdownButtonFormField<String>(
-          items: countries.map((String country) {
-            return DropdownMenuItem<String>(
-              child: Text(country),
-              value: country,
-            );
-          }).toList(),
-          onChanged: (value) {
-            setState(() {
-              selectedcountry = value!;
-            });
-          },
-          value: selectedcountry,
-          decoration: InputDecoration(
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.green),
-            ),
+        Padding(
+          padding: const EdgeInsets.only(right: 60, left: 60),
+          child: DropdownButtonFormField<String>(
+            value: selectedcountry,
+            items: countries.map((String country) {
+              return DropdownMenuItem<String>(
+                value: country,
+                child: Text(country),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                selectedcountry = value!;
+              });
+            },
+            decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.green),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green))),
           ),
         ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 40,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      hintText: "+92",
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green))),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            SizedBox(
+              width: 250,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: phonecontroller,
+                decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green))),
+              ),
+            )
+          ],
+        )
       ]),
+      floatingActionButton: UiHelper.custombutton(
+          callback: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => OpdScreen()));
+          },
+          buttonname: "Next"),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

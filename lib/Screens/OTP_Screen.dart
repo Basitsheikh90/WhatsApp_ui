@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_app/Widgets/Ui_helper.dart';
 
+// ignore: must_be_immutable
 class OtpScreen extends StatelessWidget {
   String phonenumber;
   OtpScreen({required this.phonenumber});

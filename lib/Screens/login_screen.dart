@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_app/Screens/OPD_Screen.dart';
+import 'package:whatsapp_app/Screens/OTP_Screen.dart';
 import 'package:whatsapp_app/Widgets/Ui_helper.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -118,11 +118,26 @@ class _LoginScreenState extends State<LoginScreen> {
       ]),
       floatingActionButton: UiHelper.custombutton(
           callback: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => OpdScreen()));
+            login(phonecontroller.text.toString());
           },
           buttonname: "Next"),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  login(String phonenumber) {
+    if (phonenumber == "") {
+      return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Enter your phone Number"),
+        backgroundColor: Colors.green,
+      ));
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => OtpScreen(
+                    phonenumber: phonenumber,
+                  )));
+    }
   }
 }

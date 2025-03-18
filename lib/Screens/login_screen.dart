@@ -63,9 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
               );
             }).toList(),
             onChanged: (value) {
-              setState(() {
-                selectedcountry = value!;
-              });
+              // setState(() {
+              //   selectedcountry = value!;
+              // });
             },
             decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
